@@ -1,6 +1,7 @@
 # CORPORATE
 ## Valid Payloads
 ### Valid Payload 1
+```JSON
 {
  "AboutCompany": {
  "CompanyName": "Tech Innovators Inc.",
@@ -42,7 +43,10 @@
  },
  "HasBeneficialOwner": false
 }
+```
+
 ### Valid Payload 2
+```JSON
 {
  "AboutCompany": {
  "CompanyName": "Global Ventures Ltd.",
@@ -118,8 +122,11 @@
  }
  ]
 }
+```
+
 ## Invalid Payloads
 ### Invalid Payload 1 (Missing Required Fields)
+```JSON
 {
  "AboutCompany": {
  "CompanyName": "Tech Innovators Inc.",
@@ -161,7 +168,10 @@
  }
  // Missing HasBeneficialOwner field
 }
+```
+
 ### Invalid Payload 2 (Invalid Email Format) - not invalid actually
+```JSON
 {
  "AboutCompany": {
  "CompanyName": "Global Ventures Ltd.",
@@ -237,7 +247,7 @@
  }
  ]
 }
-
+```
 
 _____
 
@@ -245,6 +255,7 @@ _____
 # INDIVIDUAL
 ## Valid Payloads
 ### Valid Payload 1
+```JSON
 {
   "PrivateUserInfo": {
     "Firstname": "John",
@@ -278,9 +289,10 @@ _____
     "MonthlyTransferAmount": 2
   }
 }
-
+```
 
 ### Valid Payload 2
+```JSON
 {
   "PrivateUserInfo": {
     "Firstname": "Jane",
@@ -317,9 +329,11 @@ _____
     "MonthlyTransferAmount": 3
   }
 }
+```
 
 ## Invalid Payloads
 ### Invalid Payload 1 (Missing required fields)
+```JSON
 {
   "PrivateUserInfo": {
     "Firstname": "Alice",
@@ -353,9 +367,11 @@ _____
     // Missing MonthlyTransferAmount
   }
 }
+```
 
 ### Invalid Payload 2 (Invalid data type)
 
+```JSON
 {
   "PrivateUserInfo": {
     "Firstname": "Bob",
@@ -392,6 +408,6 @@ _____
     "MonthlyTransferAmount": 4
   }
 }
-
+```
 
 
