@@ -1,24 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KycFormValidationTest.EdiModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace KycFormValidationTest.Models
 {
-    public class SaveCorporateFormRequest
+    public class CorporateFormViewModel
     {
         [Required]
-        public AboutCompanyDto AboutCompany { get; set; }
+        public AboutCompanyViewModel AboutCompany { get; set; }
 
         [Required]
-        public PurposeDto PurposeDto { get; set; }
+        public PurposeViewModel Purpose { get; set; }
 
         [Required]
-        public FilledByDto FilledBy { get; set; }
+        public FilledByViewModel FilledBy { get; set; }
 
         public bool HasBeneficialOwner { get; set; }
 
-        public List<BeneficialOwnerDto>? BeneficialOwners { get; set; }
+        public List<BeneficialOwnerViewModel>? BeneficialOwners { get; set; }
+
+        public static explicit operator SaveCorporateFormRequest(CorporateFormViewModel viewModel)
+        {
+            return new SaveCorporateFormRequest
+            {
+                AboutCompany = (AboutCompanyDto)viewModel.AboutCompany,
+                PurposeDto = (PurposeDto)viewModel.Purpose,
+                FilledBy = (FilledByDto)viewModel.FilledBy,
+                HasBeneficialOwner = viewModel.HasBeneficialOwner,
+                BeneficialOwners = viewModel.BeneficialOwners?.Select(bo => (BeneficialOwnerDto)bo).ToList()
+            };
+        }
     }
 
-    public class AboutCompanyDto
+    public class AboutCompanyViewModel
     {
         [Required]
         public string CompanyName { get; set; }
@@ -41,13 +54,29 @@ namespace KycFormValidationTest.Models
         public string? CompanyRevenueOther { get; set; }
 
         [Required]
-        public AddressDto CompanyAddress { get; set; }
+        public AddressViewModel CompanyAddress { get; set; }
 
         [Required]
-        public ContactDto CompanyContact { get; set; }
+        public ContactViewModel CompanyContact { get; set; }
+
+        public static explicit operator AboutCompanyDto(AboutCompanyViewModel viewModel)
+        {
+            return new AboutCompanyDto
+            {
+                CompanyName = viewModel.CompanyName,
+                CountryOfRegistration = viewModel.CountryOfRegistration,
+                OrganizationNumber = viewModel.OrganizationNumber,
+                CompanyForm = viewModel.CompanyForm,
+                CompanyFormOther = viewModel.CompanyFormOther,
+                CompanyRevenues = viewModel.CompanyRevenues,
+                CompanyRevenueOther = viewModel.CompanyRevenueOther,
+                CompanyAddress = (AddressDto)viewModel.CompanyAddress,
+                CompanyContact = (ContactDto)viewModel.CompanyContact
+            };
+        }
     }
 
-    public class AddressDto
+    public class AddressViewModel
     {
         [Required]
         public string Street { get; set; }
@@ -60,9 +89,20 @@ namespace KycFormValidationTest.Models
 
         [Required]
         public string Country { get; set; }
+
+        public static explicit operator AddressDto(AddressViewModel viewModel)
+        {
+            return new AddressDto
+            {
+                Street = viewModel.Street,
+                Postcode = viewModel.Postcode,
+                City = viewModel.City,
+                Country = viewModel.Country
+            };
+        }
     }
 
-    public class ContactDto
+    public class ContactViewModel
     {
         [Required]
         [EmailAddress]
@@ -78,9 +118,21 @@ namespace KycFormValidationTest.Models
         public string? RoleOther { get; set; }
 
         public string? Homepage { get; set; }
+
+        public static explicit operator ContactDto(ContactViewModel viewModel)
+        {
+            return new ContactDto
+            {
+                Email = viewModel.Email,
+                TelephoneNumber = viewModel.TelephoneNumber,
+                Role = viewModel.Role,
+                RoleOther = viewModel.RoleOther,
+                Homepage = viewModel.Homepage
+            };
+        }
     }
 
-    public class PurposeDto
+    public class PurposeViewModel
     {
         [Required]
         public string PurposeOfBusinessRelationship { get; set; }
@@ -94,9 +146,21 @@ namespace KycFormValidationTest.Models
         public CorporateMonthlyTransferAmountEnum MonthlyTransferAmount { get; set; }
 
         public decimal? MonthlyTransferAmountOther { get; set; }
+
+        public static explicit operator PurposeDto(PurposeViewModel viewModel)
+        {
+            return new PurposeDto
+            {
+                PurposeOfBusinessRelationship = viewModel.PurposeOfBusinessRelationship,
+                TransactionFrequency = viewModel.TransactionFrequency,
+                TransactionFrequencyOther = viewModel.TransactionFrequencyOther,
+                MonthlyTransferAmount = viewModel.MonthlyTransferAmount,
+                MonthlyTransferAmountOther = viewModel.MonthlyTransferAmountOther
+            };
+        }
     }
 
-    public class FilledByDto
+    public class FilledByViewModel
     {
         [Required]
         public bool ConfirmationOfCorrectData { get; set; }
@@ -119,10 +183,24 @@ namespace KycFormValidationTest.Models
         public string TelephoneNumber { get; set; }
 
         [Required]
-        public List<NationalIdDto> NationalIds { get; set; }
+        public List<NationalIdViewModel> NationalIds { get; set; }
+
+        public static explicit operator FilledByDto(FilledByViewModel viewModel)
+        {
+            return new FilledByDto
+            {
+                ConfirmationOfCorrectData = viewModel.ConfirmationOfCorrectData,
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                WorkRole = viewModel.WorkRole,
+                Email = viewModel.Email,
+                TelephoneNumber = viewModel.TelephoneNumber,
+                NationalIds = viewModel.NationalIds.Select(nid => (NationalIdDto)nid).ToList()
+            };
+        }
     }
 
-    public class NationalIdDto
+    public class NationalIdViewModel
     {
         [Required]
         public string Country { get; set; }
@@ -134,9 +212,20 @@ namespace KycFormValidationTest.Models
 
         [Required]
         public string IdNumber { get; set; }
+
+        public static explicit operator NationalIdDto(NationalIdViewModel viewModel)
+        {
+            return new NationalIdDto
+            {
+                Country = viewModel.Country,
+                TypeOfIdNumber = viewModel.TypeOfIdNumber,
+                TypeOfIdNumberOther = viewModel.TypeOfIdNumberOther,
+                IdNumber = viewModel.IdNumber
+            };
+        }
     }
 
-    public class BeneficialOwnerDto
+    public class BeneficialOwnerViewModel
     {
         [Required]
         public string FirstName { get; set; }
@@ -152,36 +241,64 @@ namespace KycFormValidationTest.Models
         public string? RoleOther { get; set; }
 
         [Required]
-        public AddressDto Address { get; set; }
+        public AddressViewModel Address { get; set; }
 
         [Required]
-        public List<NationalIdDto> NationalIDs { get; set; }
+        public List<NationalIdViewModel> NationalIDs { get; set; }
 
         [Required]
-        public List<CitizenshipDto> Citizenships { get; set; }
+        public List<CitizenshipViewModel> Citizenships { get; set; }
 
         [Required]
         public List<string> TaxResidency { get; set; }
 
         [Required]
-        public OwnershipDto Ownership { get; set; }
+        public OwnershipViewModel Ownership { get; set; }
 
         public bool IsJointlyOwned { get; set; }
 
         [Required]
-        public PepDto Pep { get; set; }
+        public PepViewModel Pep { get; set; }
+
+        public static explicit operator BeneficialOwnerDto(BeneficialOwnerViewModel viewModel)
+        {
+            return new BeneficialOwnerDto
+            {
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                DateOfBirth = viewModel.DateOfBirth,
+                Role = viewModel.Role,
+                RoleOther = viewModel.RoleOther,
+                Address = (AddressDto)viewModel.Address,
+                NationalIDs = viewModel.NationalIDs.Select(nid => (NationalIdDto)nid).ToList(),
+                Citizenships = viewModel.Citizenships.Select(c => (CitizenshipDto)c).ToList(),
+                TaxResidency = viewModel.TaxResidency,
+                Ownership = (OwnershipDto)viewModel.Ownership,
+                IsJointlyOwned = viewModel.IsJointlyOwned,
+                Pep = (PepDto)viewModel.Pep
+            };
+        }
     }
 
-    public class CitizenshipDto
+    public class CitizenshipViewModel
     {
         [Required]
         public string Country { get; set; }
 
         [Required]
         public List<ConnectionToCountryEnum> ConnectionToCountry { get; set; }
+
+        public static explicit operator CitizenshipDto(CitizenshipViewModel viewModel)
+        {
+            return new CitizenshipDto
+            {
+                Country = viewModel.Country,
+                ConnectionToCountry = viewModel.ConnectionToCountry
+            };
+        }
     }
 
-    public class OwnershipDto
+    public class OwnershipViewModel
     {
         [Required]
         public OwnershipTypeEnum OwnershipType { get; set; }
@@ -189,9 +306,19 @@ namespace KycFormValidationTest.Models
         public ControlTypeEnum? ControlType { get; set; }
 
         public decimal? OwnershipPercentage { get; set; }
+
+        public static explicit operator OwnershipDto(OwnershipViewModel viewModel)
+        {
+            return new OwnershipDto
+            {
+                OwnershipType = viewModel.OwnershipType,
+                ControlType = viewModel.ControlType,
+                OwnershipPercentage = viewModel.OwnershipPercentage
+            };
+        }
     }
 
-    public class PepDto
+    public class PepViewModel
     {
         [Required]
         public bool IsPEP { get; set; }
@@ -201,6 +328,17 @@ namespace KycFormValidationTest.Models
         public PepPositionEnum? Position { get; set; }
 
         public string? Country { get; set; }
+
+        public static explicit operator PepDto(PepViewModel viewModel)
+        {
+            return new PepDto
+            {
+                IsPEP = viewModel.IsPEP,
+                RelationshipToPep = viewModel.RelationshipToPep,
+                Position = viewModel.Position,
+                Country = viewModel.Country
+            };
+        }
     }
 
 
@@ -209,19 +347,29 @@ namespace KycFormValidationTest.Models
     // ===========================
 
 
-    public class SavePrivateFormRequest
+    public class PrivateFormViewModel
     {
         [Required]
-        public PrivateUserInfoDto PrivateUserInfo { get; set; }
+        public PrivateUserInfoViewModel PrivateUserInfo { get; set; }
 
         [Required]
-        public UserEconomyDto UserEconomy { get; set; }
+        public UserEconomyViewModel UserEconomy { get; set; }
 
         [Required]
-        public PurposeAndTransactionsDto PurposeAndTransactions { get; set; }
+        public PurposeAndTransactionsViewModel PurposeAndTransactions { get; set; }
+
+        public static explicit operator SavePrivateFormRequest(PrivateFormViewModel viewModel)
+        {
+            return new SavePrivateFormRequest
+            {
+                PrivateUserInfo = (PrivateUserInfoDto)viewModel.PrivateUserInfo,
+                UserEconomy = (UserEconomyDto)viewModel.UserEconomy,
+                PurposeAndTransactions = (PurposeAndTransactionsDto)viewModel.PurposeAndTransactions
+            };
+        }
     }
 
-    public class PrivateUserInfoDto
+    public class PrivateUserInfoViewModel
     {
         [Required]
         public string Firstname { get; set; }
@@ -230,18 +378,31 @@ namespace KycFormValidationTest.Models
         public string Lastname { get; set; }
 
         [Required]
-        public AddressDto Address { get; set; }
+        public AddressViewModel Address { get; set; }
 
         [Required]
         public List<string> TaxResidency { get; set; }
 
         [Required]
-        public List<CitizenshipDto> Citizenships { get; set; }
+        public List<CitizenshipViewModel> Citizenships { get; set; }
 
-        public PepDto PepInfo { get; set; }
+        public PepViewModel PepInfo { get; set; }
+
+        public static explicit operator PrivateUserInfoDto(PrivateUserInfoViewModel viewModel)
+        {
+            return new PrivateUserInfoDto
+            {
+                Firstname = viewModel.Firstname,
+                Lastname = viewModel.Lastname,
+                Address = (AddressDto)viewModel.Address,
+                TaxResidency = viewModel.TaxResidency,
+                Citizenships = viewModel.Citizenships.Select(c => (CitizenshipDto)c).ToList(),
+                PepInfo = viewModel.PepInfo != null ? (PepDto)viewModel.PepInfo : null
+            };
+        }
     }
 
-    public class UserEconomyDto
+    public class UserEconomyViewModel
     {
         [Required]
         public EmploymentStatusEnum Employment { get; set; }
@@ -257,9 +418,21 @@ namespace KycFormValidationTest.Models
         public List<MainSourceFundsEnum> MainFundSources { get; set; }
 
         public string? FundSourceOther { get; set; }
+
+        public static explicit operator UserEconomyDto(UserEconomyViewModel viewModel)
+        {
+            return new UserEconomyDto
+            {
+                Employment = viewModel.Employment,
+                Salary = viewModel.Salary,
+                Currency = viewModel.Currency,
+                MainFundSources = viewModel.MainFundSources,
+                FundSourceOther = viewModel.FundSourceOther
+            };
+        }
     }
 
-    public class PurposeAndTransactionsDto
+    public class PurposeAndTransactionsViewModel
     {
         [Required]
         public List<BusinessPurposeEnum> BusinessPurposes { get; set; }
@@ -275,5 +448,18 @@ namespace KycFormValidationTest.Models
         public PrivateMonthlyTransferAmountEnum MonthlyTransferAmount { get; set; }
 
         public decimal? MonthlyTransferAmountOther { get; set; }
+
+        public static explicit operator PurposeAndTransactionsDto(PurposeAndTransactionsViewModel viewModel)
+        {
+            return new PurposeAndTransactionsDto
+            {
+                BusinessPurposes = viewModel.BusinessPurposes,
+                BusinessPurposeOther = viewModel.BusinessPurposeOther,
+                TransactionFrequency = viewModel.TransactionFrequency,
+                TransactionFrequencyOther = viewModel.TransactionFrequencyOther,
+                MonthlyTransferAmount = viewModel.MonthlyTransferAmount,
+                MonthlyTransferAmountOther = viewModel.MonthlyTransferAmountOther
+            };
+        }
     }
 }
