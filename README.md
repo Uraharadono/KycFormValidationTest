@@ -239,3 +239,159 @@
 }
 
 
+_____
+
+
+# INDIVIDUAL
+## Valid Payloads
+### Valid Payload 1
+{
+  "PrivateUserInfo": {
+    "Firstname": "John",
+    "Lastname": "Doe",
+    "Address": {
+      "Street": "123 Main St",
+      "Postcode": "12345",
+      "City": "Anytown",
+      "Country": "USA"
+    },
+    "TaxResidency": ["USA"],
+    "Citizenships": [
+      {
+        "Country": "USA",
+        "ConnectionToCountry": [1, 2]
+      }
+    ],
+    "PepInfo": {
+      "IsPEP": false
+    }
+  },
+  "UserEconomy": {
+    "Employment": 1,
+    "Salary": 50000,
+    "Currency": "USD",
+    "MainFundSources": [1, 2]
+  },
+  "PurposeAndTransactions": {
+    "BusinessPurposes": [1, 2],
+    "TransactionFrequency": 2,
+    "MonthlyTransferAmount": 2
+  }
+}
+
+
+### Valid Payload 2
+{
+  "PrivateUserInfo": {
+    "Firstname": "Jane",
+    "Lastname": "Smith",
+    "Address": {
+      "Street": "456 Elm St",
+      "Postcode": "67890",
+      "City": "Othertown",
+      "Country": "Canada"
+    },
+    "TaxResidency": ["Canada"],
+    "Citizenships": [
+      {
+        "Country": "Canada",
+        "ConnectionToCountry": [3, 4]
+      }
+    ],
+    "PepInfo": {
+      "IsPEP": true,
+      "RelationshipToPep": 1,
+      "Position": 2,
+      "Country": "Canada"
+    }
+  },
+  "UserEconomy": {
+    "Employment": 2,
+    "Salary": 30000,
+    "Currency": "CAD",
+    "MainFundSources": [3, 4]
+  },
+  "PurposeAndTransactions": {
+    "BusinessPurposes": [3, 4],
+    "TransactionFrequency": 3,
+    "MonthlyTransferAmount": 3
+  }
+}
+
+## Invalid Payloads
+### Invalid Payload 1 (Missing required fields)
+{
+  "PrivateUserInfo": {
+    "Firstname": "Alice",
+    "Lastname": "Johnson",
+    "Address": {
+      "Street": "789 Oak St",
+      "Postcode": "54321",
+      "City": "Sometown",
+      "Country": "UK"
+    },
+    "TaxResidency": ["UK"],
+    "Citizenships": [
+      {
+        "Country": "UK",
+        "ConnectionToCountry": [5]
+      }
+    ],
+    "PepInfo": {
+      "IsPEP": false
+    }
+  },
+  "UserEconomy": {
+    "Employment": 3,
+    "Salary": 20000,
+    "Currency": "GBP",
+    "MainFundSources": [5]
+  },
+  "PurposeAndTransactions": {
+    "BusinessPurposes": [5],
+    "TransactionFrequency": 4
+    // Missing MonthlyTransferAmount
+  }
+}
+
+### Invalid Payload 2 (Invalid data type)
+
+{
+  "PrivateUserInfo": {
+    "Firstname": "Bob",
+    "Lastname": "Brown",
+    "Address": {
+      "Street": "321 Pine St",
+      "Postcode": "98765",
+      "City": "Anycity",
+      "Country": "Australia"
+    },
+    "TaxResidency": ["Australia"],
+    "Citizenships": [
+      {
+        "Country": "Australia",
+        "ConnectionToCountry": [1, 2]
+      }
+    ],
+    "PepInfo": {
+      "IsPEP": true,
+      "RelationshipToPep": 2,
+      "Position": 3,
+      "Country": "Australia"
+    }
+  },
+  "UserEconomy": {
+    "Employment": 4,
+    "Salary": "invalid_salary", // Invalid data type
+    "Currency": "AUD",
+    "MainFundSources": [1, 2]
+  },
+  "PurposeAndTransactions": {
+    "BusinessPurposes": [6, 7],
+    "TransactionFrequency": 5,
+    "MonthlyTransferAmount": 4
+  }
+}
+
+
+
