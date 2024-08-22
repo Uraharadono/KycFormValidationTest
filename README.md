@@ -20,7 +20,7 @@
  "Role": 1
  }
  },
- "PurposeDto": {
+ "Purpose": {
  "PurposeOfBusinessRelationship": "Investment",
  "TransactionFrequency": 1,
  "MonthlyTransferAmount": 1
@@ -62,7 +62,7 @@
  "Role": 2
  }
  },
- "PurposeDto": {
+ "Purpose": {
  "PurposeOfBusinessRelationship": "Partnership",
  "TransactionFrequency": 2,
  "MonthlyTransferAmount": 2
@@ -139,7 +139,7 @@
  "Role": 1
  }
  },
- "PurposeDto": {
+ "Purpose": {
  "PurposeOfBusinessRelationship": "Investment",
  "TransactionFrequency": 1,
  "MonthlyTransferAmount": 1
@@ -181,7 +181,7 @@
  "Role": 2
  }
  },
- "PurposeDto": {
+ "Purpose": {
  "PurposeOfBusinessRelationship": "Partnership",
  "TransactionFrequency": 2,
  "MonthlyTransferAmount": 2
