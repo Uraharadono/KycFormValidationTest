@@ -3,45 +3,48 @@
 ### Valid Payload 1
 ```JSON
 {
- "AboutCompany": {
- "CompanyName": "Tech Innovators Inc.",
- "CountryOfRegistration": "USA",
- "OrganizationNumber": "123456789",
- "CompanyForm": 1,
- "CompanyRevenues": [1, 2],
- "CompanyAddress": {
- "Street": "123 Innovation Drive",
- "Postcode": "94043",
- "City": "Mountain View",
- "Country": "USA"
- },
- "CompanyContact": {
- "Email": "contact@techinnovators.com",
- "TelephoneNumber": "+1234567890",
- "Role": 1
- }
- },
- "Purpose": {
- "PurposeOfBusinessRelationship": "Investment",
- "TransactionFrequency": 1,
- "MonthlyTransferAmount": 1
- },
- "FilledBy": {
- "ConfirmationOfCorrectData": true,
- "FirstName": "John",
- "LastName": "Doe",
- "WorkRole": "CEO",
- "Email": "john.doe@techinnovators.com",
- "TelephoneNumber": "+1234567890",
- "NationalIds": [
- {
- "Country": "USA",
- "TypeOfIdNumber": 1,
- "IdNumber": "987654321"
- }
- ]
- },
- "HasBeneficialOwner": false
+  "AboutCompany": {
+    "CompanyName": "Tech Innovators Inc.",
+    "CountryOfRegistration": "USA",
+    "OrganizationNumber": "123456789",
+    "CompanyForm": 1,
+    "CompanyRevenues": [
+      1,
+      2
+    ],
+    "CompanyAddress": {
+      "Street": "123 Innovation Drive",
+      "Postcode": "94043",
+      "City": "Mountain View",
+      "Country": "USA"
+    },
+    "CompanyContact": {
+      "Email": "contact@techinnovators.com",
+      "TelephoneNumber": "+1234567890",
+      "Role": 1
+    }
+  },
+  "Purpose": {
+    "PurposeOfBusinessRelationship": "Investment",
+    "TransactionFrequency": 1,
+    "MonthlyTransferAmount": 1
+  },
+  "FilledBy": {
+    "ConfirmationOfCorrectData": true,
+    "FirstName": "John",
+    "LastName": "Doe",
+    "WorkRole": "CEO",
+    "Email": "john.doe@techinnovators.com",
+    "TelephoneNumber": "+1234567890",
+    "NationalIds": [
+      {
+        "Country": "USA",
+        "TypeOfIdNumber": 1,
+        "IdNumber": "987654321"
+      }
+    ]
+  },
+  "HasBeneficialOwner": false
 }
 ```
 
